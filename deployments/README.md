@@ -654,7 +654,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 0
-      maxSurge: 0  # This will cause issues
+      maxSurge: 1  
   selector:
     matchLabels:
       app: rolling-test
