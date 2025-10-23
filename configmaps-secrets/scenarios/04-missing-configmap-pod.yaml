@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: missing-configmap-pod
+spec:
+  containers:
+  - name: app
+    image: nginx:alpine
+    env:
+    - name: CONFIG_VALUE
+      valueFrom:
+        configMapKeyRef:
+          name: nonexistent-config
+          key: somekey

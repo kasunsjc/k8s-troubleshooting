@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: crashloop-test
+spec:
+  containers:
+  - name: app
+    image: nginx:alpine
+    command: ["nonexistent-command"]

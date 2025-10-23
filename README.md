@@ -38,6 +38,48 @@ k8s-troubleshooting/
 | **Resources** | Quotas, limits, resource management | [resources/README.md](./resources/README.md) |
 | **AKS** | Azure Kubernetes Service specific issues | [aks/README.md](./aks/README.md) |
 
+## YAML Scenario Files
+
+Many troubleshooting guides include YAML scenario files that can be deployed directly without using `cat <<EOF` syntax. These files are organized in `scenarios/` directories within each section:
+
+### Available Scenario Collections
+
+| Section | Scenarios Directory | Description |
+|---------|-------------------|-------------|
+| **ConfigMaps & Secrets** | [configmaps-secrets/scenarios/](./configmaps-secrets/scenarios/) | 13 scenarios for testing ConfigMap and Secret issues |
+| **Networking** | [networking/scenarios/](./networking/scenarios/) | 4 scenarios for pod communication and NetworkPolicy testing |
+| **Pods** | [pods/scenarios/](./pods/scenarios/) | 3 scenarios for pod lifecycle and resource issues |
+| **Deployments** | [deployments/scenarios/](./deployments/scenarios/) | 5 scenarios for deployment rollouts and scaling issues |
+| **Services** | [services/scenarios/](./services/scenarios/) | 4 scenarios for service connectivity and endpoint issues |
+| **Storage** | [storage/scenarios/](./storage/scenarios/) | 1 scenario for PVC and storage class issues |
+| **Ingress** | [ingress/scenarios/](./ingress/scenarios/) | Directory created (scenarios to be extracted) |
+| **RBAC** | [rbac/scenarios/](./rbac/scenarios/) | Directory created (scenarios to be extracted) |
+| **Nodes** | [nodes/scenarios/](./nodes/scenarios/) | Directory created (scenarios to be extracted) |
+| **Resources** | [resources/scenarios/](./resources/scenarios/) | Directory created (scenarios to be extracted) |
+| **Namespaces** | [namespaces/scenarios/](./namespaces/scenarios/) | Directory created (scenarios to be extracted) |
+
+### Quick Usage
+
+```bash
+# Deploy all scenarios for a specific section
+kubectl apply -f configmaps-secrets/scenarios/
+kubectl apply -f networking/scenarios/
+kubectl apply -f pods/scenarios/
+
+# Deploy specific scenario
+kubectl apply -f configmaps-secrets/scenarios/01-manual-test-pod.yaml
+
+# Clean up all scenarios
+kubectl delete -f */scenarios/
+
+# Extract additional YAML scenarios from other README files
+./extract-yaml-scenarios.sh
+```
+
+### Windows/PowerShell Users
+
+For Windows users who cannot use `cat <<EOF` syntax, the individual YAML files provide an alternative. Additionally, the ConfigMaps & Secrets guide includes PowerShell equivalents for all scenarios.
+
 ## General Troubleshooting Commands
 
 Essential kubectl commands for initial investigation across all resource types.

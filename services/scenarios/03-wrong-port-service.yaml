@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-port-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: custom-port-app
+  template:
+    metadata:
+      labels:
+        app: custom-port-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wrong-port-service
+spec:
+  selector:
+    app: custom-port-app
+  ports:
+  - port: 80
+    targetPort: 8080  # Wrong target port

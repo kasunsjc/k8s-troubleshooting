@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: subpath-test-pod
+spec:
+  containers:
+  - name: app
+    image: nginx:alpine
+    volumeMounts:
+    - name: config-volume
+      mountPath: /etc/nginx/nginx.conf  # This conflicts with existing nginx.conf
+      subPath: nginx.conf
+    - name: config-volume
+      mountPath: /etc/app/app.conf
+      subPath: app.conf
+  volumes:
+  - name: config-volume
+    configMap:
+      name: multifile-config

@@ -2,6 +2,26 @@
 
 Guide for troubleshooting Kubernetes PersistentVolume and PersistentVolumeClaim issues.
 
+## YAML Scenario Files
+
+Individual YAML scenario files are available in the `scenarios/` directory:
+
+| File | Description | Usage |
+|------|-------------|-------|
+| [`01-orphaned-pvc.yaml`](./scenarios/01-orphaned-pvc.yaml) | PVC with non-existent StorageClass | `kubectl apply -f scenarios/01-orphaned-pvc.yaml` |
+
+### Quick Commands
+
+```bash
+# Deploy all storage test scenarios
+kubectl apply -f scenarios/
+
+# Clean up all scenarios
+kubectl delete -f scenarios/
+```
+
+---
+
 ## Common Storage Issues
 
 ### PVC Stuck in Pending

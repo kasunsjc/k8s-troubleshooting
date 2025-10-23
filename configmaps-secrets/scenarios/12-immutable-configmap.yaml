@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immutable-config
+data:
+  setting: "value1"
+immutable: true

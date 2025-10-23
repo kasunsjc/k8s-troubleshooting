@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: probe-test-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: probe-test
+  template:
+    metadata:
+      labels:
+        app: probe-test
+    spec:
+      containers:
+      - name: app
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /nonexistent-endpoint
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 3

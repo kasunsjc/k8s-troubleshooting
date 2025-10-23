@@ -1,6 +1,31 @@
 # Service Troubleshooting Guide
 
-Comprehensive guide for troubleshooting Kubernetes Service connectivity and routing issues.
+# Service Troubleshooting Guide
+
+Comprehensive guide for troubleshooting Kubernetes Service connectivity, endpoints, and load balancing issues.
+
+## YAML Scenario Files
+
+Individual YAML scenario files are available in the `scenarios/` directory:
+
+| File | Description | Usage |
+|------|-------------|-------|
+| [`01-test-connectivity-pod.yaml`](./scenarios/01-test-connectivity-pod.yaml) | Pod for testing service connectivity | `kubectl apply -f scenarios/01-test-connectivity-pod.yaml` |
+| [`02-wrong-selector-service.yaml`](./scenarios/02-wrong-selector-service.yaml) | Service with incorrect selector | `kubectl apply -f scenarios/02-wrong-selector-service.yaml` |
+| [`03-wrong-port-service.yaml`](./scenarios/03-wrong-port-service.yaml) | Service with wrong port configuration | `kubectl apply -f scenarios/03-wrong-port-service.yaml` |
+| [`04-unready-service.yaml`](./scenarios/04-unready-service.yaml) | Service with unready endpoints | `kubectl apply -f scenarios/04-unready-service.yaml` |
+
+### Quick Commands
+
+```bash
+# Deploy all service test scenarios
+kubectl apply -f scenarios/
+
+# Clean up all scenarios
+kubectl delete -f scenarios/
+```
+
+---
 
 ## Table of Contents
 

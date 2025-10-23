@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  app.properties: |
+    server.port=8080
+    database.url=jdbc:postgresql://db:5432/myapp
+    logging.level=INFO
+  nginx.conf: |
+    server {
+        listen 80;
+        location / {
+            proxy_pass http://backend:8080;
+        }
+    }

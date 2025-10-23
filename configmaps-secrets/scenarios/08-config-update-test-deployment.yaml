@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-update-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-update-test
+  template:
+    metadata:
+      labels:
+        app: config-update-test
+    spec:
+      containers:
+      - name: app
+        image: busybox:latest
+        command: ["sh", "-c", "while true; do echo $MESSAGE; sleep 10; done"]
+        env:
+        - name: MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: update-test-config
+              key: message

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cross-namespace-test-fixed
+spec:
+  containers:
+  - name: app
+    image: nginx:alpine
+    env:
+    - name: SECRET_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: cross-namespace-secret
+          key: token

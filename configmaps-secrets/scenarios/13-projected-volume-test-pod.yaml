@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: projected-volume-test
+spec:
+  containers:
+  - name: app
+    image: busybox
+    command: ["sleep", "3600"]
+    volumeMounts:
+    - name: projected-config
+      mountPath: /etc/config
+  volumes:
+  - name: projected-config
+    projected:
+      sources:
+      - configMap:
+          name: app-config
+      - secret:
+          name: app-secret

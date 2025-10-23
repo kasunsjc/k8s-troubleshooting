@@ -4,14 +4,52 @@ Comprehensive guide for troubleshooting Kubernetes ConfigMap and Secret issues.
 
 ## Table of Contents
 
-1. [ConfigMap Issues](#configmap-issues)
-2. [Secret Issues](#secret-issues)
-3. [Volume Mount Problems](#volume-mount-problems)
-4. [Environment Variable Issues](#environment-variable-issues)
-5. [Encoding and Data Problems](#encoding-and-data-problems)
-6. [Permission and RBAC Issues](#permission-and-rbac-issues)
-7. [Update and Reload Issues](#update-and-reload-issues)
-8. [Quick Reference Commands](#quick-reference-commands)
+1. [YAML Scenario Files](#yaml-scenario-files)
+2. [ConfigMap Issues](#configmap-issues)
+3. [Secret Issues](#secret-issues)
+4. [Volume Mount Problems](#volume-mount-problems)
+5. [Environment Variable Issues](#environment-variable-issues)
+6. [Encoding and Data Problems](#encoding-and-data-problems)
+7. [Permission and RBAC Issues](#permission-and-rbac-issues)
+8. [Update and Reload Issues](#update-and-reload-issues)
+9. [Quick Reference Commands](#quick-reference-commands)
+10. [PowerShell Equivalents for Windows](#powershell-equivalents-for-windows)
+
+---
+
+## YAML Scenario Files
+
+All YAML scenario files referenced in this guide are available in the `scenarios/` directory for direct use:
+
+| File | Description | Usage |
+|------|-------------|-------|
+| [`01-manual-test-pod.yaml`](./scenarios/01-manual-test-pod.yaml) | Test pod for ConfigMap and Secret verification | `kubectl apply -f scenarios/01-manual-test-pod.yaml` |
+| [`02-app-config-configmap.yaml`](./scenarios/02-app-config-configmap.yaml) | Application configuration ConfigMap | `kubectl apply -f scenarios/02-app-config-configmap.yaml` |
+| [`03-env-config-configmap.yaml`](./scenarios/03-env-config-configmap.yaml) | Environment-specific ConfigMap | `kubectl apply -f scenarios/03-env-config-configmap.yaml` |
+| [`04-missing-configmap-pod.yaml`](./scenarios/04-missing-configmap-pod.yaml) | Pod with missing ConfigMap reference | `kubectl apply -f scenarios/04-missing-configmap-pod.yaml` |
+| [`05-missing-configmap-pod-fixed.yaml`](./scenarios/05-missing-configmap-pod-fixed.yaml) | Fixed version of missing ConfigMap pod | `kubectl apply -f scenarios/05-missing-configmap-pod-fixed.yaml` |
+| [`06-encoding-issue-secret.yaml`](./scenarios/06-encoding-issue-secret.yaml) | Secret with encoding issues | `kubectl apply -f scenarios/06-encoding-issue-secret.yaml` |
+| [`07-permission-test-pod.yaml`](./scenarios/07-permission-test-pod.yaml) | Pod with volume mount permission issues | `kubectl apply -f scenarios/07-permission-test-pod.yaml` |
+| [`08-config-update-test-deployment.yaml`](./scenarios/08-config-update-test-deployment.yaml) | Deployment for testing ConfigMap updates | `kubectl apply -f scenarios/08-config-update-test-deployment.yaml` |
+| [`09-cross-namespace-test-pod.yaml`](./scenarios/09-cross-namespace-test-pod.yaml) | Pod trying to access Secret from different namespace | `kubectl apply -f scenarios/09-cross-namespace-test-pod.yaml` |
+| [`10-cross-namespace-test-fixed-pod.yaml`](./scenarios/10-cross-namespace-test-fixed-pod.yaml) | Fixed cross-namespace Secret access | `kubectl apply -f scenarios/10-cross-namespace-test-fixed-pod.yaml` |
+| [`11-subpath-test-pod.yaml`](./scenarios/11-subpath-test-pod.yaml) | Pod with subPath mount issues | `kubectl apply -f scenarios/11-subpath-test-pod.yaml` |
+| [`12-immutable-configmap.yaml`](./scenarios/12-immutable-configmap.yaml) | Immutable ConfigMap example | `kubectl apply -f scenarios/12-immutable-configmap.yaml` |
+| [`13-projected-volume-test-pod.yaml`](./scenarios/13-projected-volume-test-pod.yaml) | Pod using projected volumes | `kubectl apply -f scenarios/13-projected-volume-test-pod.yaml` |
+
+### Quick Deployment Commands
+
+```bash
+# Deploy all test scenarios at once
+kubectl apply -f scenarios/
+
+# Deploy specific scenarios
+kubectl apply -f scenarios/01-manual-test-pod.yaml
+kubectl apply -f scenarios/02-app-config-configmap.yaml
+
+# Clean up all scenarios
+kubectl delete -f scenarios/
+```
 
 ---
 

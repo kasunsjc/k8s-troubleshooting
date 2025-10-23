@@ -2,6 +2,29 @@
 
 Guide for troubleshooting Kubernetes networking, DNS, and connectivity issues.
 
+## YAML Scenario Files
+
+Individual YAML scenario files are available in the `scenarios/` directory:
+
+| File | Description | Usage |
+|------|-------------|-------|
+| [`01-pod-to-pod-communication.yaml`](./scenarios/01-pod-to-pod-communication.yaml) | Client and server pods for testing communication | `kubectl apply -f scenarios/01-pod-to-pod-communication.yaml` |
+| [`02-service-discovery-dns.yaml`](./scenarios/02-service-discovery-dns.yaml) | Service, deployment, and test pod for DNS testing | `kubectl apply -f scenarios/02-service-discovery-dns.yaml` |
+| [`03-networkpolicy-test-pods.yaml`](./scenarios/03-networkpolicy-test-pods.yaml) | Pods for testing NetworkPolicy restrictions | `kubectl apply -f scenarios/03-networkpolicy-test-pods.yaml` |
+| [`04-deny-cross-namespace-networkpolicy.yaml`](./scenarios/04-deny-cross-namespace-networkpolicy.yaml) | NetworkPolicy blocking cross-namespace traffic | `kubectl apply -f scenarios/04-deny-cross-namespace-networkpolicy.yaml` |
+
+### Quick Commands
+
+```bash
+# Deploy all networking test scenarios
+kubectl apply -f scenarios/
+
+# Clean up all scenarios
+kubectl delete -f scenarios/
+```
+
+---
+
 ## Common Network Issues
 
 ### Pod-to-Pod Communication Problems

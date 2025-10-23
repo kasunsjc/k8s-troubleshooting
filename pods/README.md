@@ -2,6 +2,28 @@
 
 Comprehensive guide for troubleshooting common Pod issues in Kubernetes.
 
+## YAML Scenario Files
+
+Individual YAML scenario files are available in the `scenarios/` directory:
+
+| File | Description | Usage |
+|------|-------------|-------|
+| [`01-pending-pod-test.yaml`](./scenarios/01-pending-pod-test.yaml) | Pod with excessive resource requests | `kubectl apply -f scenarios/01-pending-pod-test.yaml` |
+| [`02-pending-pod-test-fixed.yaml`](./scenarios/02-pending-pod-test-fixed.yaml) | Fixed version with reasonable resource requests | `kubectl apply -f scenarios/02-pending-pod-test-fixed.yaml` |
+| [`03-crashloop-test.yaml`](./scenarios/03-crashloop-test.yaml) | Pod with invalid command causing CrashLoopBackOff | `kubectl apply -f scenarios/03-crashloop-test.yaml` |
+
+### Quick Commands
+
+```bash
+# Deploy all pod test scenarios
+kubectl apply -f scenarios/
+
+# Clean up all scenarios
+kubectl delete -f scenarios/
+```
+
+---
+
 ## Table of Contents
 
 1. [Common Pod States](#common-pod-states)

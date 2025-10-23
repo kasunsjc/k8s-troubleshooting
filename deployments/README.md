@@ -1,6 +1,32 @@
 # Deployment Troubleshooting Guide
 
-Comprehensive guide for troubleshooting Kubernetes Deployment issues.
+# Deployment Troubleshooting Guide
+
+Comprehensive guide for troubleshooting Kubernetes Deployment issues including rollouts, scaling, and resource management.
+
+## YAML Scenario Files
+
+Individual YAML scenario files are available in the `scenarios/` directory:
+
+| File | Description | Usage |
+|------|-------------|-------|
+| [`01-resource-hungry-deployment.yaml`](./scenarios/01-resource-hungry-deployment.yaml) | Deployment with high resource requests | `kubectl apply -f scenarios/01-resource-hungry-deployment.yaml` |
+| [`02-probe-test-deployment.yaml`](./scenarios/02-probe-test-deployment.yaml) | Deployment with failing readiness probe | `kubectl apply -f scenarios/02-probe-test-deployment.yaml` |
+| [`03-rolling-update-test.yaml`](./scenarios/03-rolling-update-test.yaml) | Deployment with rolling update strategy issues | `kubectl apply -f scenarios/03-rolling-update-test.yaml` |
+| [`04-finalizer-test-deployment.yaml`](./scenarios/04-finalizer-test-deployment.yaml) | Deployment with finalizer causing deletion issues | `kubectl apply -f scenarios/04-finalizer-test-deployment.yaml` |
+| [`05-resource-test-deployment.yaml`](./scenarios/05-resource-test-deployment.yaml) | Deployment with excessive resource constraints | `kubectl apply -f scenarios/05-resource-test-deployment.yaml` |
+
+### Quick Commands
+
+```bash
+# Deploy all deployment test scenarios
+kubectl apply -f scenarios/
+
+# Clean up all scenarios
+kubectl delete -f scenarios/
+```
+
+---
 
 ## Table of Contents
 
