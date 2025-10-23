@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quota-exceeding-deployment
+  namespace: quota-test
+spec:
+  replicas: 3  # This exceeds the pod quota of 2
+  selector:
+    matchLabels:
+      app: quota-test
+  template:
+    metadata:
+      labels:
+        app: quota-test
+    spec:
+      containers:
+      - name: app
+        image: nginx:alpine
+        resources:
+          requests:
+            cpu: "150m"  # This exceeds the CPU quota
+            memory: "100Mi"
+          limits:
+            cpu: "300m"  # This exceeds the CPU limit quota
+            memory: "200Mi"

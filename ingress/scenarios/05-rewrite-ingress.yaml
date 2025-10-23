@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rewrite-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /\$2  # Wrong regex group
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: rewrite.local
+    http:
+      paths:
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: rewrite-app
+            port:
+              number: 80

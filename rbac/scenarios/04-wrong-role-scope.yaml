@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: rbac-test
+  name: node-viewer  # This should be a ClusterRole
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: node-viewer-binding
+  namespace: rbac-test
+subjects:
+- kind: ServiceAccount
+  name: cluster-viewer
+  namespace: rbac-test
+roleRef:
+  kind: Role
+  name: node-viewer
+  apiGroup: rbac.authorization.k8s.io

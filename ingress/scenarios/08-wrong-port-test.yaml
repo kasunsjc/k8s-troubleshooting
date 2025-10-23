@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wrong-port-test
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: test2.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-missing
+            port:
+              number: 8080  # Wrong port

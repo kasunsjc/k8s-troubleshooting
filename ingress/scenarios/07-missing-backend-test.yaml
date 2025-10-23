@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: missing-backend-test
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: test1.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nonexistent-svc
+            port:
+              number: 80

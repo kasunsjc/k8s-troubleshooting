@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-filler-1
+spec:
+  containers:
+  - name: disk-consumer
+    image: busybox
+    command:
+    - sh
+    - -c
+    - |
+      df -h /tmp
+      dd if=/dev/zero of=/tmp/bigfile1 bs=1M count=100
+      sleep 3600
+    volumeMounts:
+    - name: host-tmp
+      mountPath: /tmp
+  volumes:
+  - name: host-tmp
+    hostPath:
+      path: /tmp
+  nodeSelector:
+    kubernetes.io/os: linux

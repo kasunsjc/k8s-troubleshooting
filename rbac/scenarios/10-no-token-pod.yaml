@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: no-token-pod
+  namespace: rbac-test
+spec:
+  serviceAccountName: token-test-sa
+  automountServiceAccountToken: false  # Disable token mounting
+  containers:
+  - name: test-container
+    image: bitnami/kubectl:latest
+    command: ["sleep", "3600"]

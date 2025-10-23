@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cross-ns-pod
+  namespace: rbac-test
+spec:
+  serviceAccountName: cross-ns-sa
+  containers:
+  - name: kubectl-container
+    image: bitnami/kubectl:latest
+    command: ["sleep", "3600"]

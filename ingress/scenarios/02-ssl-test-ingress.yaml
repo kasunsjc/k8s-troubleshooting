@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ssl-test-ingress
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - ssl-test.local
+    secretName: invalid-tls-secret
+  rules:
+  - host: ssl-test.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ssl-app
+            port:
+              number: 80

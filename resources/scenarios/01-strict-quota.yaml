@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: strict-quota
+  namespace: resource-quota-test
+spec:
+  hard:
+    requests.cpu: "200m"
+    requests.memory: "256Mi"
+    limits.cpu: "400m"
+    limits.memory: "512Mi"
+    pods: "3"
+    services: "2"
+    persistentvolumeclaims: "1"

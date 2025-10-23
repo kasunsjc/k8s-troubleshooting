@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cluster-test-pod
+  namespace: rbac-test
+spec:
+  serviceAccountName: cluster-viewer
+  containers:
+  - name: kubectl-container
+    image: bitnami/kubectl:latest
+    command: ["sleep", "3600"]

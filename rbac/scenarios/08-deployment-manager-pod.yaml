@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deployment-manager-pod
+  namespace: rbac-test
+spec:
+  serviceAccountName: deployment-manager
+  containers:
+  - name: kubectl-container
+    image: bitnami/kubectl:latest
+    command: ["sleep", "3600"]
